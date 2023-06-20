@@ -22,7 +22,7 @@
   </form>
 
   <script>
-    // Retrieve the form element
+    /* Retrieve the form element
     var userForm = document.getElementById("user-form");
 
     // Add submit event listener to the form
@@ -48,7 +48,39 @@
       userForm.reset();
 
       // Display a success message
-      alert("User details submitted successfully!");
+      alert("User details submitted successfully!");*/
+      // Function to add a new user
+function addUser(user) {
+  // Retrieve existing users from local storage
+  var existingUsers = localStorage.getItem('users');
+  
+  if (existingUsers) {
+    // Parse existing users from JSON
+    existingUsers = JSON.parse(existingUsers);
+    
+    // Remove the oldest user
+    existingUsers.shift();
+    
+    // Add the new user at the end
+    existingUsers.push(user);
+  } else {
+    // If no existing users, create a new array with the user
+    existingUsers = [user];
+  }
+  
+  // Store updated users in local storage
+  localStorage.setItem('users', JSON.stringify(existingUsers));
+}
+
+// Example usage
+var newUser = {
+  name: 'John Doe',
+  age: 25,
+  email: 'john.doe@example.com'
+};
+
+addUser(newUser);
+
     });
   </script>
 </body>
